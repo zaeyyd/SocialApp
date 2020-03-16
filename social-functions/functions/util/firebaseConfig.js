@@ -1,9 +1,9 @@
-require("dotenv").config();
 
 const key = process.env.API_KEY
 
+
 module.exports = {
-    apiKey: "AIzaSyBxSJymAKKW1jvPCdgn2k1Fud5DoPlCJFI", 
+    apiKey: key, 
     authDomain: "socialapp1265.firebaseapp.com",
     databaseURL: "https://socialapp1265.firebaseio.com",
     projectId: "socialapp1265",
