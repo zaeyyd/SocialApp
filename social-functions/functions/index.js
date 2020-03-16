@@ -13,7 +13,7 @@ app.get('/posts', getAllPosts)
 // send new post
 app.post('/post', FBAuth, sendPost)
 // set profile pic
-app.post('/user/img', uploadImg)
+app.post('/user/img',FBAuth, uploadImg)
 
 
 // sign up

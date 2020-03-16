@@ -19,9 +19,10 @@ exports.signup = (req, res) =>
 
     if(!valid) return res.status(400).json(errors)
 
-    
+    const noImg = 'no-img.png'
         
-        let token, userID;
+    let token, userID;
+
         db.doc(`/users/${newUser.AT}`).get()
             .then(doc => {
                 if(doc.exists){
@@ -41,8 +42,8 @@ exports.signup = (req, res) =>
                     AT: newUser.AT,
                     email: newUser.email,
                     createTime: new Date().toISOString(),
+                    imgURL: `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${noImg}?alt=media`,
                     userID
-
                 }
                 return db.doc(`/users/${newUser.AT}`).set(userCredentials)
             })
@@ -55,7 +56,7 @@ exports.signup = (req, res) =>
                 console.error(err)
                 }
                 else{
-                    res.status(500).json({ error: 'there was an error'})
+                    res.status(500).json({ error: `${err}`})
                     console.error(err)
                 }
                 
@@ -112,12 +113,45 @@ exports.uploadImg = (req,res) => {
 
 
     busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
+
+        console.log(filename)
+        console.log(fieldname)
+        console.log(mimetype)
+
         const imageEx = filename.split('.')[filename.split('.').length - 1]
 
         imageFileName = `${Math.round(Math.random()*1000000)}.${imageEx}`
 
         const filepath = path.join(os.tmpdir(), imageFileName)
 
+        imagesToBeUploaded = { filepath, mimetype }
+        file.pipe(fs.createWriteStream(filepath))
+
     })
+    busboy.on('finish', () => {
+        admin.storage().bucket(`${firebaseConfig.storageBucket}`).upload(imageToBeUploaded.filepath, {
+            resumable: false,
+            metadata: {
+                metadata:{
+                    contentType: imageToBeUploaded.mimetype
+                }
+            }
+        })
+        .then(()=> {
+            const imageURL = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${imageFileName}?alt=media`
+            return db.doc(`/users/${req.user.AT}`).update({ imageURL })
+        })
+        .then(()=>{
+            return res.json({ message: 'Image uploaded'})
+        })
+        .catch(err => {
+            console.error(err)
+            return res.status(500).json({ error: err.code })
+        })
+    }) 
+    busboy.end(req.rawBody)
+
+
+
 }
 
