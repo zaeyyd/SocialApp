@@ -7,17 +7,21 @@ const FBAuth = require('./util/FBAuth')
 
 
 const { getAllPosts, sendPost } = require('./handlers/posts')
-const { signup, signin, uploadImg } = require('./handlers/users')
+const { signup, signin, uploadImg, addUserDetails, getUserDetails } = require('./handlers/users')
 
 
 // see all posts
 app.get('/posts', getAllPosts)
 // send new post
 app.post('/post', FBAuth, sendPost)
+
+
+app.post('/user', FBAuth, addUserDetails)
+app.get('/user', FBAuth, getUserDetails)
+
+
 // set profile pic
 app.post('/user/img',FBAuth, uploadImg)
-
-
 // sign up
 app.post('/signup', signup )
 // sign in

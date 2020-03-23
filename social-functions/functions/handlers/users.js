@@ -4,7 +4,7 @@ const firebaseConfig = require('../util/firebaseConfig')
 const firebase = require('firebase')
 firebase.initializeApp(firebaseConfig)
 
-const { validateSignUpData, validateSignInData } = require('../util/validators')
+const { validateSignUpData, validateSignInData, reduceUserDetails } = require('../util/validators')
 
 exports.signup = (req, res) =>
 {
@@ -65,7 +65,6 @@ exports.signup = (req, res) =>
     
 }
 
-
 exports.signin = (req, res) => {
     const user = {
         email: req.body.email,
@@ -100,6 +99,43 @@ exports.signin = (req, res) => {
 
 }
 
+exports.addUserDetails = (req, res) => {
+    let userDetails = reduceUserDetails(req.body)
+
+    db.doc(`/users/${req.user.AT}`).update(userDetails)
+    .then(()=> {
+        return res.json({ message: 'Details added'})
+    })
+    .catch(err => {
+        return res.status(500).json({ error: err.code})
+    })
+}
+
+exports.getUserDetails = (req, res) => {
+    let userData = {}
+
+    db.doc(`/users/${req.user.AT}`).get()
+    .then((doc)=> {
+        if(doc.exists){
+            userData.credentials = doc.data()
+            return db.collection('likes').where('userAT', '==', req.user.AT).get()
+        }
+    })
+    .then(data => {
+        userData.likes = []
+        data.forEach(doc => {
+
+            userData.likes.push(doc.data())
+        })
+
+        return res.json(userData)
+    })
+    .catch(err => {
+        console.error(err)
+        return res.status(500).json({ error: err.code})
+    })
+}
+
 exports.uploadImg = (req,res) => {
     const BusBoy = require('busboy')
     const path = require('path')
@@ -114,9 +150,9 @@ exports.uploadImg = (req,res) => {
 
     busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
 
-        console.log(filename)
-        console.log(fieldname)
-        console.log(mimetype)
+        if(mimetype !== 'image/jpeg' && mimetype !== 'image/png'){
+            return res.status(400).json({ error: "Wrong file type"})
+        }
  
         const imageEx = filename.split('.')[filename.split('.').length - 1]
 
@@ -156,4 +192,5 @@ exports.uploadImg = (req,res) => {
 
 
 }
+
 
