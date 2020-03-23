@@ -1,4 +1,4 @@
-const { db } = require('../util/admin')
+const { db,admin } = require('../util/admin')
 const firebaseConfig = require('../util/firebaseConfig')
 
 const firebase = require('firebase')
@@ -117,14 +117,16 @@ exports.uploadImg = (req,res) => {
         console.log(filename)
         console.log(fieldname)
         console.log(mimetype)
-
+ 
         const imageEx = filename.split('.')[filename.split('.').length - 1]
 
-        imageFileName = `${Math.round(Math.random()*1000000)}.${imageEx}`
+        imageFileName = `${Math.round(
+            Math.random() * 1000000000000
+          ).toString()}.${imageEx}`
 
         const filepath = path.join(os.tmpdir(), imageFileName)
 
-        imagesToBeUploaded = { filepath, mimetype }
+        imageToBeUploaded = { filepath, mimetype }
         file.pipe(fs.createWriteStream(filepath))
 
     })
@@ -136,17 +138,17 @@ exports.uploadImg = (req,res) => {
                     contentType: imageToBeUploaded.mimetype
                 }
             }
-        })
+        })  
         .then(()=> {
-            const imageURL = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${imageFileName}?alt=media`
-            return db.doc(`/users/${req.user.AT}`).update({ imageURL })
+            const imgURL = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${imageFileName}?alt=media`
+            return db.doc(`/users/${req.user.AT}`).update({ imgURL })
         })
         .then(()=>{
             return res.json({ message: 'Image uploaded'})
         })
         .catch(err => {
             console.error(err)
-            return res.status(500).json({ error: err.code })
+            return res.status(500).json({err: `${err}`})
         })
     }) 
     busboy.end(req.rawBody)
