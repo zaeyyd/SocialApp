@@ -22,6 +22,8 @@ module.exports = (req, res, next) =>
     })
     .then(data => {
         req.user.AT = data.docs[0].data().AT
+        req.user.imgURL = data.docs[0].data().imgURL
+
         return next()
     })
     .catch(err => {
