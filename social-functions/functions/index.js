@@ -49,26 +49,28 @@ exports.createLikeNotification = functions
                 
             })
         }
+        else{
+            return res.status(404).json({ error: ' does not exist'})
+        }
     })
     .catch(err=>{
         console.error(err)
     })
 })
 
-exports.deleteUnLikeNotification = functions.region('us-central1').firestore.document('likes/{id}')
+exports.deleteUnLikeNotification = functions
+.region('us-central1')
+.firestore.document('likes/{id}')
 .onDelete((snapshot)=>{
-    db.doc(`/notifications/${snapshot.id}`)
+    return db.doc(`/notifications/${snapshot.id}`)
     .delete()
-    .then(()=>{
-        return
-    })
     .catch((err)=>{
         console.error(err)
-        return;
     })
 })
 
-exports.createCommentNotification = functions.region('us-central1')
+exports.createCommentNotification = functions
+.region('us-central1')
 .firestore.document('comments/{id}')
 .onCreate((snapshot)=>{
     return db.doc(`/posts/${snapshot.data().postID}`).get()
@@ -87,7 +89,65 @@ exports.createCommentNotification = functions.region('us-central1')
     })
     .catch(err=>{
         console.error(err)
-        return;
+       
+    })
+
+})
+
+exports.userImageChange = functions
+.region('us-central1')
+.firestore.document('/users/{userID}')
+.onUpdate((change)=>{
+    console.log(change.before.data())
+    console.log(change.after.data())
+
+    if(change.before.data().imgURL !== change.after.data().imgURL){
+        console.log('image has changed')
+
+        let batch = db.batch()
+
+        return db.collection('posts').where('userAT', '==', change.before.data().AT).get()
+        .then((data)=> {
+          data.forEach(doc => {
+              const post = db.doc(`/posts/${doc.id}`)
+              batch.update(post, {userIMG: change.after.data().imgURL})
+        })
+        return batch.commit()
+    })
+    }
+    else return true
+
+})
+
+exports.onPostDelete = functions
+.region('us-central1')
+.firestore.document('/posts/{postID}')
+.onDelete((snapshot, context) => {
+    const postID = context.params.postID 
+    const batch = db.batch()
+    return db.collection('comments')
+    .where('postID', '==', postID)
+    .get()
+    .then(data => {
+        data.forEach(doc => {
+            batch.delete(db.doc(`/comments/${doc.id}`))
+        })
+        return db.collection('likes').where('postID', '==', postID).get()
+    })
+    .then(data => {
+        data.forEach(doc => {
+            batch.delete(db.doc(`/likes/${doc.id}`))
+        })
+        return db.collection('notifications').where('postID', '==', postID).get()
+    })
+    .then(data => {
+        data.forEach(doc => {
+            batch.delete(db.doc(`/notifications/${doc.id}`))
+        })
+        return batch.commit()
+    })
+    .catch( err => {
+        console.error(err)
     })
 
 })

@@ -12,7 +12,8 @@ exports.getAllPosts = (req,res) => {
                 postID: doc.id,
                 body: doc.data().body,
                 userAT: doc.data().userAT,
-                createTime: doc.data().createTime
+                createTime: doc.data().createTime,
+                userIMG: doc.data().userIMG
             })
         });
         return (res.json(posts))
@@ -79,7 +80,7 @@ exports.getPost = (req,res) => {
 
 exports.postComment = (req,res) => { // increase comment count
     if(req.body.body.trim() == '' || req.body.body.trim() == null){
-        return res.status(400).json({ err: 'Empty body'})
+        return res.status(400).json({ comment: 'Please write something'})
     }
 
     const newComment = {

@@ -52,12 +52,13 @@ exports.signup = (req, res) =>
             })
             .catch( err => {
                 if(err.code === 'auth/email-already-in-use'){
-                    res.status(500).json({ email: 'email in use'})
+                    return res.status(500).json({ email: 'email in use'})
                 console.error(err)
                 }
                 else{
-                    res.status(500).json({ error: `${err}`})
                     console.error(err)
+                    return res.status(500).json({ general: 'Something went wrong'})
+                    
                 }
                 
             })
@@ -89,10 +90,9 @@ exports.signin = (req, res) => {
     .catch(
         err => {
             console.error(err)
-            if(err.code === 'auth/wrong-password'){
-                return res.status(403).json({ general: 'wrong information'})
-            }
-            return res.status(500).json({ error: error.code})
+            
+            return res.status(403).json({ general: 'wrong information'})
+          
         }
     )
 
@@ -211,7 +211,54 @@ exports.uploadImg = (req,res) => {
 }
 
 exports.getUserInfo = (req,res) => {
+
     let userData = {}
+
     db.doc(`/users/${req.params.AT}`)
-    .get()
+    .get() // !100%
+    .then(doc => {
+         if(doc.exists){
+              userData.user = doc.data()
+              return db.collection('posts').where('userAT', '==', req.params.AT)
+              .orderBy('createTime', 'desc'  )
+              .get()
+         }
+
+    })
+    .then(data => {
+        userData.posts = []
+        data.forEach(doc => {
+            userData.posts.push({
+                body: doc.data().body,
+                createTime: doc.data().createTime,
+                userAT: doc.data().userAT,
+                userIMG: doc.data().userIMG,
+                likeCount: doc.data().likeCount,
+                commentCount: doc.data().commentCount,
+                postID: doc.id
+            })
+        })
+        return res.json(userData)
+    })
+    .catch(err => {
+        console.error(err)
+        return res.status(500).json({err: err.code})
+    })
+}
+
+
+exports.markNotificRead = (req,res) => {
+    let batch = db.batch()
+    req.body.forEach( notificationID => {
+        const notification = db.doc (`/notifications/${notificationID}`)
+        batch.update(notification, { read: true })
+    })
+    batch.commit()
+    .then(()=>{
+        return res.json({ message: 'Notifications marked read'})
+    })
+    .catch(err => {
+        console.error(err)
+        return res.status(500).json({err: err.code})
+    })
 }
