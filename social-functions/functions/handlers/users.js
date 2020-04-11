@@ -91,7 +91,7 @@ exports.signin = (req, res) => {
         err => {
             console.error(err)
             
-            return res.status(403).json({ general: 'wrong information'})
+            return res.status(403).json({ error: 'wrong information'})
           
         }
     )
