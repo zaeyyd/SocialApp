@@ -6,32 +6,16 @@ import AppIcon from '../images/icon.png'
 import Typography from '@material-ui/core/Typography'
 import { TextField, Button } from '@material-ui/core'
 import axios from 'axios'
+import CircularProgress from '@material-ui/core/CircularProgress'
+let Link = require("react-router-dom").Link
 
 
-const styles = {
-    form: {
-        textAlign: 'center'
-    },
-    image: {
-        margin: 'auto 10px auto 10px',
-        height: 50
-    },
-    button: {
-        margin: '20px auto 20px auto'
-    },
-    textField: {
-        margin: '20px auto 20px auto'
-    },
-    pageTitle: {
-        margin: '20px auto 20px auto'
-    },
-    customError: {
-        color: 'red',
-        fontSize: '0.8rem',
-        margin: 10
-    }
+const styles = (theme) => ({
+    
+    ...theme.spread
 
-}
+})
+
 
 
 class signIn extends Component {
@@ -59,6 +43,7 @@ class signIn extends Component {
         axios.post('/signin', userData)
         .then(res => {
             console.log(res.data)
+            localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`)
             this.setState({
                 loading: false
             })
@@ -110,8 +95,15 @@ class signIn extends Component {
                             </Typography> 
                         )}
 
-                        <Button type="submit" variant='contained' color='primary' className={classes.button}><h2>👉</h2></Button>
+                        <Button type="submit" variant='contained' color='primary' className={classes.button} disabled={loading}>
+                            <h2>
+                            👉
+                            </h2>
 
+                            {loading && <CircularProgress className={classes.progress}/>}
+                        </Button>
+                        <br/>
+                        <small><Link to="/signup">don't have an account?? 😮</Link></small>
                   
 
 
