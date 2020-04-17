@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button'
 let Link = require("react-router-dom").Link  // <-- other version
 
 const style = {
-    borderRadius: "15px",
+    borderRadius: "5px",
     width: "99%",
     marginTop: ".5%",
     marginBottom: ".5%",

@@ -19,7 +19,7 @@ const styles = {
     },
     image: {
         minWidth: 150,
-        borderRadius: 10,
+        borderRadius: 5,
         margin: 10
         
     },
