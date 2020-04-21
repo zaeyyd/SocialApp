@@ -4,11 +4,13 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import { logOutUser, uploadImage } from '../redux/actions/userActions'
+import EditDetails from './EditDetails'
+import MyButton from '../util/MyButton'
 
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
-import { Paper, IconButton } from '@material-ui/core'
+import { Paper, IconButton, Icon } from '@material-ui/core'
 import MuiLink from '@material-ui/core/Link'
 import Typography from '@material-ui/core/Typography'
 import EditIcon from '@material-ui/icons/Edit'
@@ -18,6 +20,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import LocationOn from '@material-ui/icons/LocationOn'
 import LinkIcon from '@material-ui/icons/Link'
 import CalendarToday from '@material-ui/icons/CalendarToday'
+import LogOutIcon from '@material-ui/icons/ExitToApp'
 
 
 
@@ -69,8 +72,6 @@ const styles =  (theme) => ({
     }
   })
 
-
-
 class Profile extends Component {
 
     handleImageChange = (event) => {
@@ -83,8 +84,11 @@ class Profile extends Component {
 
     handleEditPicture = () => {
         const fileInput = document.getElementById("imgInput")
-
         fileInput.click()
+    }
+
+    handleLogOut = () => {
+      this.props.logOutUser()
     }
 
     render() {
@@ -103,18 +107,20 @@ class Profile extends Component {
                 <Paper className={classes.paper}> 
                     <div className={classes.profile}>
                         <div className="image-wrapper">
-                            <img src={imgURL} className="profile-image" alt='profile image'/>
-                            <input 
+
+                          <Tooltip title="Change Photo" placement="top">
+                            <a onClick={this.handleEditPicture}>
+                              <img src={imgURL} className="profile-image" alt='profile image'/>
+                            </a> 
+                          </Tooltip>
+
+                          <input 
                             type="file" 
                             id="imgInput" 
                             onChange={this.handleImageChange}
                             hidden='hidden'
-                            />
-                        <Tooltip title="Edit Profile Image" placement="top">
-                        <IconButton onClick={this.handleEditPicture} className="button">
-                            <EditIcon color="primary"/>
-                        </IconButton>
-                        </Tooltip>
+                          />
+                
                         </div>
                         <hr/>
 
@@ -150,6 +156,12 @@ class Profile extends Component {
                             <span>Joined {dayjs(createTime).format('MMM YYYY')}</span>
                         </div>
 
+                        <MyButton tip="Logout" onClick={this.handleLogOut} >
+                          <LogOutIcon color="primary"/>
+                        </MyButton>
+
+
+                        <EditDetails/>
                     </div>
                 </Paper>
             ) : (

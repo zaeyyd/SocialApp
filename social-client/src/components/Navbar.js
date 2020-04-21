@@ -1,12 +1,19 @@
-import React, { Component } from 'react'
-//import { Link } from '@material-ui/core';
+import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import MyButton from '../util/MyButton'
 
 // Mat stuff
 import Appbar from '@material-ui/core/AppBar' // <--- compile each part separately for speeeed
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 
-let Link = require("react-router-dom").Link  // <-- other version
+import AddIcon from '@material-ui/icons/Add'
+import HomeIcon from '@material-ui/icons/Home'
+import NotificationsIcon from '@material-ui/icons/Notifications'
+
+//let Link = require("react-router-dom").Link  // <-- other version
 
 const style = {
     borderRadius: "5px",
@@ -20,15 +27,44 @@ const style = {
 
 class Navbar extends Component {
     render() {
+        const { authenticated } = this.props
         return (
            
             <Appbar  style={style} >
             
                 <Toolbar className="nav-container" >
 
-                    <Button color='inherit' component={Link} to='/'> Home</Button>
-                    <Button color='inherit' component={Link} to='/signup'> Sign Up</Button>
-                    <Button color='inherit' component={Link} to='/signin'> Sign In</Button>
+                    { authenticated ? (
+                        <Fragment>
+
+                            <Link to="/">
+                                <MyButton tip="Home">
+                                    <HomeIcon />
+                                </MyButton>
+                            </Link>
+
+
+                            <MyButton tip="Say something">
+                                <AddIcon />
+                            </MyButton>
+
+
+                            <MyButton tip='Notifications'>
+                                <NotificationsIcon />
+                            </MyButton>
+                        </Fragment>
+                    ) : (
+                        <Fragment>
+
+                        <Link to="/">
+                                <MyButton tip="Home">
+                                    <HomeIcon />
+                                </MyButton>
+                        </Link>     
+                        <Button color='inherit' component={Link} to='/signup'> Sign Up</Button>
+                        <Button color='inherit' component={Link} to='/signin'> Sign In</Button>
+                        </Fragment>
+                    )}
                     
                 </Toolbar>
             </Appbar>
@@ -37,4 +73,12 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar
+Navbar.propTypes = {
+    authenticated: PropTypes.bool.isRequired
+}
+
+const mapStateToProps = state => ({
+    authenticated: state.user.authenticated
+})
+
+export default connect(mapStateToProps)(Navbar)
