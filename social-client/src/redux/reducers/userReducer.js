@@ -1,4 +1,4 @@
-import { SET_USER, CLEAR_ERRORS, LOADING_UI, SET_ERRORS, SET_AUTHED, LOADING_USER, SET_UNAUTHED } from '../types'
+import { SET_USER, CLEAR_ERRORS, LOADING_UI, SET_ERRORS, SET_AUTHED, LOADING_USER, SET_UNAUTHED, LIKE_POST, UNLIKE_POST } from '../types'
 
 const initialState = {
     authenticated: false,
@@ -27,6 +27,22 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 loading: true
+            }
+        case LIKE_POST:
+            return{
+                ...state,
+                likes: [
+                    ...state.likes,
+                    {
+                        userAT: state.credentials.AT,
+                        postID: action.payload.postID
+                    }
+                ]
+            }
+        case UNLIKE_POST:
+            return{
+                ...state,
+                likes: state.likes.filter(like => like.postID !== action.payload.postID)
             }
         default:
             return state

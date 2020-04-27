@@ -1,33 +1,26 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid'
 import axios from 'axios'
+import PropTypes from 'prop-types'
+
 import Post from '../components/Post'
 import Profile from '../components/Profile'
 
-export class home extends Component {
+import { connect } from 'react-redux'
+import { getPosts } from '../redux/actions/dataActions'
 
+class home extends Component {
 
-
-    state = {
-        posts: null
-    }
     componentDidMount(){
-        axios.get('/posts')
-        .then(res => {
-            console.log(res.data)
-            this.setState({
-                posts: res.data
-            })
-        })
-        .catch(err => {
-            console.log(err)
-        })
-
+        this.props.getPosts()
     }
     render() {
-        let recentPostsMarkUp = this.state.posts ? 
+        const { posts, loading } = this.props.data
 
-        (this.state.posts.map(post => <Post key={post.postID} post={post}/> ) // curly brackets cause an error here?
+        let recentPostsMarkUp = !loading ? 
+
+        (
+            posts.map(post => <Post key={post.postID} post={post}/> ) // curly brackets cause an error here?
         ) 
         
         : <p> No Posts </p>
@@ -48,5 +41,14 @@ export class home extends Component {
     }
 }
 
-export default home
+home.propTypes = {
+    getPosts: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    data: state.data
+})
+
+export default connect(mapStateToProps, { getPosts })(home)
 
