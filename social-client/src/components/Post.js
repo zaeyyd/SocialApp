@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 import { likePost, unlikePost } from '../redux/actions/dataActions'
 import MyButton from '../util/MyButton';
 import DeletePost from './DeletePost'
+import PostDialog from './PostDialog'
 
 import ChatIcon from '@material-ui/icons/Chat'
 import FavoriteIcon from '@material-ui/icons/Favorite'
@@ -114,6 +115,8 @@ class Post extends Component {
                     </MyButton>
 
                     <span> {commentCount} comments </span>
+
+                    <PostDialog postID={postID} userAT={userAT}/>
 
                 </CardContent>
             </Card>
