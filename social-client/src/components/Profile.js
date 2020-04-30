@@ -167,7 +167,7 @@ class Profile extends Component {
             ) : (
                 <Paper className={classes.paper}>
                     <Typography variant='body2' align="center">
-                        No profile found, sign in again
+                        Not Signed In
                     </Typography>
                     <div className={classes.buttons}>
                         <Button variant="contained" color="primary" component={Link} to="/signin">
