@@ -6,10 +6,10 @@ import { DialogTitle, DialogContent, TextField, Button, Dialog } from '@material
 import AddIcon from '@material-ui/icons/Add'
 import CloseIcon from '@material-ui/icons/Close'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import MyButton from '../util/MyButton'
+import MyButton from '../../util/MyButton'
 
 import { connect } from 'react-redux'
-import { makePost, clearErrors } from '../redux/actions/dataActions'
+import { makePost, clearErrors } from '../../redux/actions/dataActions'
 
 const styles = theme => ({
     ...theme.spread,

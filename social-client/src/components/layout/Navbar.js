@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import MyButton from '../util/MyButton'
+import MyButton from '../../util/MyButton'
 
 // Mat stuff
 import Appbar from '@material-ui/core/AppBar' // <--- compile each part separately for speeeed
@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button'
 import HomeIcon from '@material-ui/icons/Home'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 
-import MakePost from './MakePost'
+import MakePost from '../post/MakePost'
 
 
 

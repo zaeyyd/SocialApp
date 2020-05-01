@@ -3,17 +3,16 @@ import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
-import { logOutUser, uploadImage } from '../redux/actions/userActions'
+import { logOutUser, uploadImage } from '../../redux/actions/userActions'
 import EditDetails from './EditDetails'
-import MyButton from '../util/MyButton'
+import MyButton from '../../util/MyButton'
 
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
-import { Paper, IconButton, Icon } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 import MuiLink from '@material-ui/core/Link'
 import Typography from '@material-ui/core/Typography'
-import EditIcon from '@material-ui/icons/Edit'
 import Tooltip from '@material-ui/core/Tooltip'
 
 

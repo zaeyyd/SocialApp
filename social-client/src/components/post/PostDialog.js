@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import PropTypes from 'prop-types'
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 import { Link } from 'react-router-dom'
 
 //MUI 
@@ -18,15 +17,15 @@ import ChatIcon from '@material-ui/icons/Chat'
 //Redux
 
 import { connect } from 'react-redux'
-import { getPost } from '../redux/actions/dataActions'
+import { getPost } from '../../redux/actions/dataActions'
 import LikeButton from './LikeButton'
+
+import Comments from './Comments'
+import CommentForm from './CommentForm'
 
 const styles = theme => ({
     ...theme.spread,
-    invisibleSeparator: {
-        border: 'none',
-        margin: 4
-    },
+    
     profileImage: {
         maxWidth: 200,
         height: 200,
@@ -67,7 +66,7 @@ class PostDialog extends Component{
     }
 
     render(){
-        const { classes, post: { postID, body, createTime, likeCount, commentCount, userIMG, userAT}, UI: { loading }}
+        const { classes, post: { postID, body, createTime, likeCount, commentCount, userIMG, userAT, comments}, UI: { loading }}
         = this.props
 
         const dialogMarkup = loading ? (
@@ -105,6 +104,12 @@ class PostDialog extends Component{
                     <span> {commentCount} comments </span>
 
                 </Grid>
+
+                <hr className={classes.visibleSeparator}/>
+
+                <CommentForm postID={postID}/>
+
+                <Comments comments={comments}/>
             </Grid>
         )
     
