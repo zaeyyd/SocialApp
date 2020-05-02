@@ -22,6 +22,7 @@ import themeFile from './util/theme'
 import home from './pages/home'
 import signIn from './pages/signIn'
 import signUp from './pages/signUp'
+import user from './pages/user'
 import Axios from 'axios'
 
 
@@ -64,6 +65,7 @@ class App extends Component {
              <Route  exact path= "/" component={home}/>
              <AuthRoute  exact path= "/signin" component={signIn} />
              <AuthRoute  exact path= '/signup' component={signUp} />
+             <Route exact path='/users/:AT' component={user}/>
             </Switch>
           </div>
  

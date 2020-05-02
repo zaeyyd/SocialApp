@@ -17,7 +17,7 @@ import ChatIcon from '@material-ui/icons/Chat'
 //Redux
 
 import { connect } from 'react-redux'
-import { getPost } from '../../redux/actions/dataActions'
+import { getPost, clearErrors } from '../../redux/actions/dataActions'
 import LikeButton from './LikeButton'
 
 import Comments from './Comments'
@@ -63,6 +63,7 @@ class PostDialog extends Component{
 
     handleClose = () => {
         this.setState({ open: false })
+        this.props.clearErrors()
     }
 
     render(){
@@ -140,6 +141,7 @@ class PostDialog extends Component{
 }
 
 PostDialog.propTypes = {
+    clearErrors: PropTypes.func.isRequired,
     getPost: PropTypes.func.isRequired,
     postID: PropTypes.string.isRequired,
     userAT: PropTypes.string.isRequired,
@@ -153,7 +155,8 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = {
-    getPost
+    getPost,
+    clearErrors
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(PostDialog))
