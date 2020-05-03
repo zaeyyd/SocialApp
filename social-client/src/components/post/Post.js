@@ -48,7 +48,7 @@ class Post extends Component {
 
         const { classes, 
             post: { body, createTime, userIMG, userAT, postID, likeCount, commentCount }, 
-            user: { authenticated, credentials: { AT } } } = this.props // <--- stuff from 
+            user: { authenticated, credentials: { AT } } } = this.props
 
         const deleteButton = authenticated && userAT === AT ? (
             <DeletePost postID={postID}/>

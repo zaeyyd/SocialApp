@@ -3,11 +3,11 @@ import MyButton from '../../util/MyButton'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-//Icons
+
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
 
-//Redux 
+
 import { connect } from 'react-redux'
 import { likePost, unlikePost } from '../../redux/actions/dataActions'
 

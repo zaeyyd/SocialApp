@@ -35,7 +35,7 @@ class MakePost extends Component{
         body: '',
         errors: {}
     }
-    componentWillReceiveProps(nextProps){   // replace this function cuz its old
+    componentWillReceiveProps(nextProps){   
         if(nextProps.UI.errors){
             this.setState({
                 errors: nextProps.UI.errors

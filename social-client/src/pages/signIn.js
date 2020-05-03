@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types'
-
-
-
 import Grid from '@material-ui/core/Grid'
 import AppIcon from '../images/icon.png'
 import Typography from '@material-ui/core/Typography'
@@ -13,7 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { connect } from 'react-redux'
 import { signInUser } from '../redux/actions/userActions'
 
-let Link = require("react-router-dom").Link
+import { Link } from 'react-router-dom'
 
 
 const styles = (theme) => ({
@@ -61,12 +58,11 @@ class signIn extends Component {
         const { classes, UI: { loading } } = this.props
         const { errors } = this.state
 
+
         return (
             <Grid container className={classes.form}>
 
                 <Grid item sm/>
-
-
                 <Grid item sm>
                     
                     <Typography variant='h2' className={classes.pageTitle}>

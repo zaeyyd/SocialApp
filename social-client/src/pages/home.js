@@ -19,7 +19,7 @@ class home extends Component {
         let recentPostsMarkUp = !loading ? 
 
         (
-            posts.map(post => <Post key={post.postID} post={post}/> ) // curly brackets cause an error here?
+            posts.map(post => <Post key={post.postID} post={post}/> ) 
         ) 
         
         : <p> No Posts </p>
@@ -34,7 +34,7 @@ class home extends Component {
                <Grid item sm={4} xs={12}> 
                 <Profile/>
                </Grid>
-
+                   
            </Grid>
         )
     }

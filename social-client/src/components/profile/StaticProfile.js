@@ -70,7 +70,7 @@ const StaticProfile = (props) => {
 
                             {bio && <Typography variant="body2"> {bio} </Typography>}
                             <hr/>
-                            {location && ( // not 100%
+                            {location && ( 
                                 <Fragment> 
                                     <LocationOn color="primary"/>
                                     <span>{location}</span>

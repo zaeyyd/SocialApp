@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import MyButton from '../../util/MyButton'
 
-// Mat stuff
-import Appbar from '@material-ui/core/AppBar' // <--- compile each part separately for speeeed
+
+import Appbar from '@material-ui/core/AppBar' 
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
 
@@ -23,7 +23,7 @@ const style = {
     marginTop: ".5%",
     marginBottom: ".5%",
     marginRight: ".5%",
-    // backgroundColor: "#cccccc"
+
     
 }
 
@@ -32,7 +32,7 @@ class Navbar extends Component {
         const { authenticated } = this.props
         return (
            
-            <Appbar  style={style} >
+            <Appbar style={style} >
             
                 <Toolbar className="nav-container" >
 

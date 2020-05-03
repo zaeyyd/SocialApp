@@ -78,7 +78,6 @@ class Profile extends Component {
         const formData = new FormData()
         formData.append('image', image, image.name)
         this.props.uploadImage(formData)
-        // send to firebase
     }
 
     handleEditPicture = () => {
@@ -132,7 +131,7 @@ class Profile extends Component {
 
                             {bio && <Typography variant="body2"> {bio} </Typography>}
                             <hr/>
-                            {location && ( // not 100%
+                            {location && (
                                 <Fragment> 
                                     <LocationOn color="primary"/>
                                     <span>{location}</span>

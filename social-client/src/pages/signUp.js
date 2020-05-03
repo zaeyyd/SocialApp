@@ -9,7 +9,7 @@ import { TextField, Button } from '@material-ui/core'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { connect } from 'react-redux'
 import { signUpUser } from '../redux/actions/userActions'
-let Link = require("react-router-dom").Link
+import { Link } from 'react-router-dom'
 
 
 const styles = (theme) => ({
@@ -69,13 +69,13 @@ class signUp extends Component {
 
                 <Grid item sm/>
 
-
                 <Grid item sm>
                     
                     <Typography variant='h2' className={classes.pageTitle}>
                     <img src={AppIcon} alt='logo' className={classes.image} />
                     Sign Up
                     </Typography>
+                    
                     <form noValidate onSubmit={this.handleSubmit}>
 
                         <TextField id='email' name='email' type='email' label='EMAIL' className={classes.textField}

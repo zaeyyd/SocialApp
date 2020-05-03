@@ -32,6 +32,8 @@ const theme = createMuiTheme(themeFile)
 
 const token = localStorage.FBIdToken
 
+Axios.defaults.baseURL = "https://us-central1-socialapp1265.cloudfunctions.net/api"
+
 
 
 

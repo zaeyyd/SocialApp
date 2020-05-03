@@ -30,7 +30,7 @@ export default function(state = initialState, action){
             index = state.posts.findIndex((post)=> post.postID === action.payload.postID)
             state.posts[index] = action.payload
             if(state.post.postID === action.payload.postID){
-                state.post = action.payload 
+                state.post.likeCount = action.payload.likeCount
             }
             return{
                 ...state
