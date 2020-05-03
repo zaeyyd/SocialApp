@@ -112,15 +112,15 @@ class PostDialog extends Component{
                 </Grid>
                 </Card>
 
-                <Card className={classes.cards}>
-                <CommentForm postID={postID}/>
-                </Card>
 
-                <Card className={classes.cards}>
+                <CommentForm postID={postID}/>
+
+
+
 
                 <Comments comments={comments}/>
 
-                </Card>
+
             </Grid>
         )
     

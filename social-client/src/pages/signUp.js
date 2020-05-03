@@ -3,6 +3,8 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 import AppIcon from '../images/icon.png'
+import Pointing from '../images/pointing.png'
+import Monkey from '../images/surprisedMonkey.png'
 import Typography from '@material-ui/core/Typography'
 import { TextField, Button } from '@material-ui/core'
 
@@ -14,7 +16,10 @@ import { Link } from 'react-router-dom'
 
 const styles = (theme) => ({
     
-    ...theme.spread
+    ...theme.spread,
+    emoji: {
+        height: '2em'
+    }
 
 })
 
@@ -101,7 +106,7 @@ class signUp extends Component {
 
                         <Button type="submit" variant='contained' color='primary' className={classes.button} disabled={loading}>
                             <h2>
-                            👉
+                            <img src={Pointing} className={classes.emoji}/>
                             </h2>
 
                             {loading && <CircularProgress className={classes.progress}/>}

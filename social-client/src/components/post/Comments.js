@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+import Card from "@material-ui/core/Card"
 
 const styles = theme => ({
     ...theme.spread,
@@ -20,6 +21,11 @@ const styles = theme => ({
     commentData: {
         marginLeft: 20,
 
+    },
+    cards: {
+        padding: '5%',
+        width: '100%',
+        margin: '2%'
     }
 })
 
@@ -28,6 +34,7 @@ class Comments extends Component{
         const { comments, classes } = this.props
 
         return (
+            <Card className={classes.cards}>
             <Grid container>
                 {comments.map((comment, index) => {
                     const { body, createTime, userIMG, userAT } = comment
@@ -67,7 +74,8 @@ class Comments extends Component{
                     )
                 })}
             </Grid>
-        )
+            </Card>
+            )
     }
 
 }

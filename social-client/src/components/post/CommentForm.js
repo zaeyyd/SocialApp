@@ -5,12 +5,18 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
+import Card from "@material-ui/core/Card"
 
 import { connect } from 'react-redux'
 import { submitComment } from '../../redux/actions/dataActions'
 
 const styles = theme => ({
     ...theme.spread,
+    cards: {
+        padding: '5%',
+        width: '100%',
+        margin: '2%'
+    }
 
 })
 class CommentForm extends Component {
@@ -43,6 +49,7 @@ class CommentForm extends Component {
         const errors  = this.state.errors
 
         const commentFormMarkup = authenticated ? (
+            <Card className={classes.cards}>
             <Grid item sm={12} style={{textAlign: 'center'}} >
                 <form onSubmit={this.handleSubmit}>
                     <TextField 
@@ -68,7 +75,8 @@ class CommentForm extends Component {
 
 
             </Grid>
-        ) : null
+            </Card>
+            ) : null
 
         return commentFormMarkup
     }
