@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom'
 import { DialogContent, Dialog, CircularProgress } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+import Card from "@material-ui/core/Card"
 
 //ICONS
 import CloseIcon from '@material-ui/icons/Close'
-import UnfoldMore from '@material-ui/icons/UnfoldMore'
 import ChatIcon from '@material-ui/icons/Chat'
 //Redux
 
@@ -42,13 +42,17 @@ const styles = theme => ({
         marginTop: '10px'
     },
     expandButton: {
-        position: 'absolute',
-        left: '90%'
+        
     },
     spinnerDiv: {
         textAlign: 'center',
         marginTop: 50,
         marginBottom: 50
+    },
+    cards: {
+        padding: '5%',
+        width: '100%',
+        margin: '2%'
     }
 })
 
@@ -75,6 +79,7 @@ class PostDialog extends Component{
             </div>
         ) : (
             <Grid container spacing={16}>
+                <Card className={classes.cards}>
                 <Grid item sm={5}>
                     <img src={userIMG} alt="Profile" className={classes.profileImage}/>
                 </Grid>
@@ -103,21 +108,26 @@ class PostDialog extends Component{
                     </MyButton>
 
                     <span> {commentCount} comments </span>
-
+                
                 </Grid>
+                </Card>
 
-                <hr className={classes.visibleSeparator}/>
-
+                <Card className={classes.cards}>
                 <CommentForm postID={postID}/>
+                </Card>
+
+                <Card className={classes.cards}>
 
                 <Comments comments={comments}/>
+
+                </Card>
             </Grid>
         )
     
         return (
             <Fragment> 
-                <MyButton onClick={this.handleOpen} tip="Expand" tipClassName={classes.expandButton}>
-                    <UnfoldMore color="primary"/> 
+                <MyButton onClick={this.handleOpen} tip="comments" tipClassName={classes.expandButton}>
+                    <ChatIcon color="primary"/> 
                 </MyButton>
 
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth='sm'>

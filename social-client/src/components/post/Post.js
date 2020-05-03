@@ -80,13 +80,11 @@ class Post extends Component {
 
                     <span> {likeCount} likes </span>
 
-                    <MyButton tip="comments">
-                        <ChatIcon color='primary'/>
-                    </MyButton>
+                    <PostDialog postID={postID} userAT={userAT}/>
 
                     <span> {commentCount} comments </span>
 
-                    <PostDialog postID={postID} userAT={userAT}/>
+                    
 
                 </CardContent>
             </Card>
