@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import MyButton from '../../util/MyButton'
+import Notifications from './Notifications'
 
 
 import Appbar from '@material-ui/core/AppBar' 
@@ -11,7 +12,7 @@ import Button from '@material-ui/core/Button'
 
 
 import HomeIcon from '@material-ui/icons/Home'
-import NotificationsIcon from '@material-ui/icons/Notifications'
+
 
 import MakePost from '../post/MakePost'
 
@@ -49,9 +50,9 @@ class Navbar extends Component {
                             <MakePost/>
 
 
-                            <MyButton tip='Notifications'>
-                                <NotificationsIcon />
-                            </MyButton>
+                            
+                                <Notifications />
+                            
                         </Fragment>
                     ) : (
                         <Fragment>

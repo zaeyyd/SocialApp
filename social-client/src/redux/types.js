@@ -6,6 +6,7 @@ export const SET_AUTHED = 'SET_AUTHED'
 export const SET_UNAUTHED = 'SET_UNAUTHED'
 export const SET_USER = 'SET_USER'
 export const LOADING_USER = 'LOADING_USER'
+export const MARK_NOTIFICATIONS_READ = 'MARK_NOTIFICATIONS_READ'
 
 // UI
 export const SET_ERRORS = 'SET_ERRORS'

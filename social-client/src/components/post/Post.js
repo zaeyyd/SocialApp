@@ -80,7 +80,7 @@ class Post extends Component {
 
                     <span> {likeCount} likes </span>
 
-                    <PostDialog postID={postID} userAT={userAT}/>
+                    <PostDialog postID={postID} userAT={userAT} openDialog={this.props.openDialog}/>
 
                     <span> {commentCount} comments </span>
 
@@ -96,7 +96,8 @@ Post.propTypes = {
   
     user: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    openDialog: PropTypes.bool
 }
 
 const mapStateToProps = state => ({

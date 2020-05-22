@@ -58,14 +58,31 @@ const styles = theme => ({
 
 class PostDialog extends Component{
     state = {
-        open: false
+        open: false,
+        oldPath: '',
+        newPath: ''
+    }
+    componentDidMount(){
+        if(this.props.openDialog){
+            this.handleOpen()
+        }
     }
     handleOpen = () => {
-        this.setState({ open: true })
+        let oldPath = window.location.pathname
+
+        const { userAT, postID } = this.props
+        const newPath = `/users/${userAT}/post/${postID}`
+
+        if(oldPath === newPath) oldPath = `/users/${userAT}`
+
+        window.history.pushState(null, null, newPath)
+
+        this.setState({ open: true, oldPath, newPath })
         this.props.getPost(this.props.postID)
     }
 
     handleClose = () => {
+        window.history.pushState(null, null, this.state.oldPath)
         this.setState({ open: false })
         this.props.clearErrors()
     }
