@@ -21,7 +21,7 @@ import LinkIcon from '@material-ui/icons/Link'
 import CalendarToday from '@material-ui/icons/CalendarToday'
 import LogOutIcon from '@material-ui/icons/ExitToApp'
 
-
+import ProfileSkeleton from '../../util/ProfileSkeleton'
 
 const styles =  (theme) => ({
     paper: {
@@ -177,7 +177,7 @@ class Profile extends Component {
                     </div>
                 </Paper>
 
-            )) : (<p> loading </p>)
+            )) : (<ProfileSkeleton/>)
 
             return profileMarkup
     }

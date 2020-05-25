@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 
 import Post from '../components/post/Post'
 import Profile from '../components/profile/Profile'
+import PostSkeleton from '../util/PostSkeleton'
+
 
 import { connect } from 'react-redux'
 import { getPosts } from '../redux/actions/dataActions'
@@ -22,7 +24,9 @@ class home extends Component {
             posts.map(post => <Post key={post.postID} post={post}/> ) 
         ) 
         
-        : <p> No Posts </p>
+        : (
+            <PostSkeleton/>
+        )
 
         return (
            <Grid container spacing={10}>
