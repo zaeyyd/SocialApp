@@ -87,6 +87,7 @@ class Profile extends Component {
 
     handleLogOut = () => {
       this.props.logOutUser()
+     
     }
 
     render() {

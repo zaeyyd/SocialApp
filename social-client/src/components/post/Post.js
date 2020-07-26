@@ -5,6 +5,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia'
 import { Typography } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar'
+import CardHeader from '@material-ui/core/CardHeader'
 
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
@@ -28,14 +30,23 @@ const styles = {
         marginBottom: 20
     },
     image: {
-        minWidth: 150,
-        borderRadius: 5,
-        margin: 10
+        minWidth: "15%",
+        borderRadius: "50rem",
+        margin: 10,
+        float: 'left'
         
     },
     content: {
-        padding: 25,
-        objectFit: 'cover'
+        padding: 15,
+        objectFit: 'cover',
+        width: "100%"
+    },
+    header: {
+        padding: "0rem"
+
+    },
+    delete: {
+        
     }
 }
 
@@ -51,15 +62,21 @@ class Post extends Component {
             user: { authenticated, credentials: { AT } } } = this.props
 
         const deleteButton = authenticated && userAT === AT ? (
-            <DeletePost postID={postID}/>
+            <DeletePost postID={postID}  />
         ) : null
         return (
             <Card className={classes.card}>
 
-                <CardMedia image={userIMG} title="DP" className={classes.image}/>
+                
 
                 <CardContent className={classes.content}>
+                
+                <CardHeader className={classes.header}
+                    avatar={
+                <Avatar src={userIMG} title="DP" className={classes.image}/>
+                    }
 
+                    title={
                     <Typography 
                     variant='h5'
                     component={Link} 
@@ -69,9 +86,15 @@ class Post extends Component {
                         {userAT} 
                         
                     </Typography>
-
-                    {deleteButton}
-
+                    }
+                    
+                    action={deleteButton}
+                    />
+                    
+                    
+                    
+                    
+                    
                     <Typography variant='body2' color="textSecondary">{dayjs(createTime).fromNow()}</Typography>
 
                     <Typography variant='body1'>{body}</Typography>

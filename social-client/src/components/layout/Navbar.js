@@ -24,6 +24,7 @@ const style = {
     marginTop: ".5%",
     marginBottom: ".5%",
     marginRight: ".5%",
+    
 
     
 }

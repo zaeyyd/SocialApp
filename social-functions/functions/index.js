@@ -9,6 +9,10 @@ const { db } = require('./util/admin')
 const cors = require('cors')
 
 app.use(cors())
+// app.use((req, res, next) => {
+//     res.append('Access-Control-Allow-Origin', ['*']);
+//     next();
+// });
 
 const { getAllPosts, sendPost, getPost, postComment, like, unlike, deletePost } = require('./handlers/posts')
 const { signup, signin, uploadImg, addUserDetails, getUserDetails, getUserInfo, markNotificRead } = require('./handlers/users')
