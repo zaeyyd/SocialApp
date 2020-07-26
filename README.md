@@ -17,7 +17,7 @@ Full Social Networking Application built with React and Firebase
 - Liking/Unliking Posts
 - Getting Notifications
 
-## Technologies + Libraries
+## Technologies Used
 ### Languages:
   - JavaScript
   - HTML
@@ -26,13 +26,16 @@ Full Social Networking Application built with React and Firebase
   - React
   - Redux
   - Material-ui
-### Back-end
+### Back-end:
   - Firebase
     - Authentication
     - Firestore (No-SQL Database)
     - Functions
   - ExpressJS
   - NodeJS
+### Tools:
+  - Git
+  - Postman
  
 
 
