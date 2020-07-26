@@ -86,7 +86,8 @@ class MakePost extends Component{
                                 label="Say Something"
                                 multiline
                                 rows="3"
-                                placeholder="keep it PG please"
+                                variant="outlined"
+                                placeholder="please keep your posts clean 😊"
                                 error={errors.body ? true : false}
                                 helperText={errors.body}
                                 className={classes.textField}

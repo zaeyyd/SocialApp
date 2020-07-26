@@ -57,7 +57,7 @@ const StaticProfile = (props) => {
         <Paper className={classes.paper}> 
                     <div className={classes.profile}>
                         <div className="image-wrapper">
-                              <img src={imgURL} className="profile-image" alt='profile image'/>
+                              <img src={imgURL} className="profile-image" alt='profile'/>
                         </div>
                         <hr/>
 

@@ -89,6 +89,7 @@ class EditDetails extends Component {
                                     label="Bio"
                                     multiline
                                     rows='3'
+                                    variant="outlined"
                                     placeholder="Some words about yourself"
                                     className={classes.textField}
                                     value={this.state.bio}
@@ -101,6 +102,7 @@ class EditDetails extends Component {
                                     name="website"
                                     type='text'
                                     label="Website"
+                                    variant="outlined"
                                     placeholder="Your website"
                                     className={classes.textField}
                                     value={this.state.website}
@@ -112,6 +114,7 @@ class EditDetails extends Component {
                                     name="location"
                                     type='text'
                                     label="Location"
+                                    variant="outlined"
                                     placeholder="Where you live"
                                     className={classes.textField}
                                     value={this.state.location}

@@ -3,7 +3,6 @@ import withStyles from '@material-ui/core/styles/withStyles'
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia'
 import { Typography } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar'
 import CardHeader from '@material-ui/core/CardHeader'
@@ -14,11 +13,9 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import MyButton from '../../util/MyButton';
 import DeletePost from './DeletePost'
 import PostDialog from './PostDialog'
 
-import ChatIcon from '@material-ui/icons/Chat'
 import LikeButton from './LikeButton';
 
 

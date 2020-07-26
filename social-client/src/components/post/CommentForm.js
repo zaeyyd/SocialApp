@@ -56,6 +56,7 @@ class CommentForm extends Component {
                         name='body'
                         type='text'
                         label='comment'
+                        variant="outlined"
                         error={errors.comment ? true : false}
                         helperText={errors.comment}
                         value={this.state.body}
