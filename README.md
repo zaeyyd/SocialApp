@@ -3,11 +3,11 @@ Full Social Networking Application built with React and Firebase
 
 ## [Live Website Link](https://socialapp1265.firebaseapp.com)
 
-### Screenshot of front-page when user is signed in
-![Screenshot of front page](media/frontPage.png) 
-
 ### Gif walkthrough of web app (30 sec)
 ![Gif walkthrough of entire web app](media/walkthrough.gif) 
+
+### Screenshot of front-page when user is signed in
+![Screenshot of front page](media/frontPage.png) 
 
 
 ## Features:
